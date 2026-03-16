@@ -22,7 +22,6 @@ jobs:
       - name: Run tests
         run: pytest
 
-
   docker-build:
     needs: test
     runs-on: ubuntu-latest
@@ -31,13 +30,4 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Build Docker Image
-        run: docker build -t calculator-app:latest .
-
-      - name: Login to Docker Hub
-        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-
-      - name: Tag Image
-        run: docker tag calculator-app:latest ${{ secrets.DOCKER_USERNAME }}/calculator-app:latest
-
-      - name: Push Image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/calculator-app:latest
+        run: docker build -t calculator-app .
